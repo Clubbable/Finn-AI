@@ -24,7 +24,7 @@ http://localhost:3001/user/id
 http://localhost:3003/tone
 
 
-### Test UserClinet###
-cd ../UserClinet
+### Test UserClient###
+cd ../UserClient
 
 yarn install
