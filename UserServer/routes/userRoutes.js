@@ -4,6 +4,8 @@ const Router = require('express');
 const userRepo = require('../repo/userRepository');
 const { v4: uuidv4 } = require('uuid');
 
+const requestTone = require('../utils/httpClient');
+
 const getUserRoutes = (app) => {
     const router = new Router();
 
@@ -12,9 +14,17 @@ const getUserRoutes = (app) => {
             res.send({ id:uuidv4()});
         })
         .get('/user/:id', (req, res) => {
-            const id = parseInt(req.params.id);
-            const result = userRepo.get(id);
-            res.send(result);
+            requestTone((err,res1) => {
+                if(err)
+                {
+                    console.log(err)
+                    return
+                }
+                const id = req.params.id;
+                let result = userRepo.get(id);
+                result.tone = res1.data.body.value;
+                res.send(result);
+            })
         })
         .post('/save', (req, res) => {
             const person = req.body;

@@ -21,4 +21,4 @@ GET endpoints are: http://localhost:3000/user/id, http://localhost:3000/user/use
 ### Docker ###
 docker build . -t nodejs-rest
 
-docker run -p 9000:3000 nodejs-rest
+docker run --name UserServer --link ApiServer:apiserver -p 3001:3001 nodejs-rest
